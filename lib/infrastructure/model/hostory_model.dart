@@ -1,23 +1,26 @@
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
+
 class Category {
   final String id;
   final String name;
 
   final List<SubCategory> subCategory;
 
-  Category({required this.id, required this.name, required this.subCategory, });
+  Category({
+    required this.id,
+    required this.name,
+    required this.subCategory,
+  });
 
-  // Convert Firestore document to Category object
   factory Category.fromMap(Map<String, dynamic> data) {
     return Category(
       id: data['id'],
       name: data['name'],
-      subCategory: (data['sub_cat'] as List)
-          .map((subCat) => SubCategory.fromMap(subCat as Map<String, dynamic>))
-          .toList(),
+      subCategory: (data['sub_cat'] as List).map((subCat) => SubCategory.fromMap(subCat as Map<String, dynamic>)).toList(),
     );
   }
 
-  // Convert Category object to Firestore document
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -25,26 +28,24 @@ class Category {
       'sub_cat': subCategory.map((subCat) => subCat.toMap()).toList(),
     };
   }
-}class SubCategory {
+}
+
+class SubCategory {
   final String id;
-   bool isSelected;
+  bool isSelected;
   final String name;
   final List<User> users;
 
-  SubCategory({required this.id, required this.name, required this.users,this.isSelected=false});
+  SubCategory({required this.id, required this.name, required this.users, this.isSelected = false});
 
-  // Convert Firestore document to Category object
   factory SubCategory.fromMap(Map<String, dynamic> data) {
     return SubCategory(
       id: data['id'],
       name: data['name'],
-      users: (data['users'] as List)
-          .map((user) => User.fromMap(user as Map<String, dynamic>))
-          .toList(),
+      users: (data['users'] as List).map((user) => User.fromMap(user as Map<String, dynamic>)).toList(),
     );
   }
 
-  // Convert Category object to Firestore document
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -61,7 +62,6 @@ class User {
 
   User({required this.name, required this.photo, required this.userDesc});
 
-  // Convert Firestore document to User object
   factory User.fromMap(Map<String, dynamic> data) {
     return User(
       name: data['name'],
@@ -70,7 +70,6 @@ class User {
     );
   }
 
-  // Convert User object to Firestore document
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -78,4 +77,26 @@ class User {
       'user_desc': userDesc,
     };
   }
+}
+
+class CatListTextField {
+  TextEditingController category;
+  List<SubCategoryTextField> subCategory;
+  bool isSelected;
+  CatListTextField({this.isSelected = false, required this.category, required this.subCategory});
+}
+
+class SubCategoryTextField {
+  TextEditingController subCategory;
+  List<UsersTextField> userTextField;
+  bool isSelected;
+  SubCategoryTextField({this.isSelected = false, required this.subCategory, required this.userTextField});
+}
+
+class UsersTextField {
+  TextEditingController userName;
+  TextEditingController desc;
+  XFile? userPhoto;
+  bool isSelected;
+  UsersTextField({this.isSelected = false, required this.userName, required this.desc, this.userPhoto});
 }

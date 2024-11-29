@@ -1,16 +1,23 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:history_ai/infrastructure/apis/get_audio_from_ai.dart';
+import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/infrastructure/model/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class MainController extends GetxController {
   TextEditingController messageController = TextEditingController();
-  // UserModel? userModel ;
   String markdownText = '';
   final AudioPlayer audioPlayer = AudioPlayer();
+ List <Category> categoryList=[];
+  List<CatListTextField> catTextList = [
+    CatListTextField(subCategory: [
+      SubCategoryTextField(
+          subCategory: TextEditingController(), userTextField: [UsersTextField(userName: TextEditingController(), desc: TextEditingController())])
+    ], category: TextEditingController())
+  ];
+
   static Future<UserModel?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = prefs.getString('user');
@@ -27,8 +34,6 @@ class MainController extends GetxController {
     super.onInit();
   }
 
-
-
   Future<void> speak(String text) async {
     final audioFilePath = await ApiMethods.getAudioFromAI(text);
     final player = AudioPlayer();
@@ -37,6 +42,7 @@ class MainController extends GetxController {
       await animateText(text);
     }
   }
+
   Future<void> animateText(String text) async {
     final words = text.split(' ');
 

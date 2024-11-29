@@ -61,9 +61,9 @@ class ChoosePersonOptionView extends StatelessWidget {
                         const SizedBox(height: 20),
                         CommonBtnContainer(
                           onTap: () {
-                            controller.isHistorySelected.value = false;
-                            controller.update();
-                            Get.toNamed(RouteConstants.chooseOwnPersonView);
+                             controller.isHistorySelected.value = false;
+                             controller.update();
+                             Get.toNamed(RouteConstants.chooseOwnPersonView);
                           },
                           title: AppConstants.ownConversion.tr,
                           isSelected: !controller.isHistorySelected.value,

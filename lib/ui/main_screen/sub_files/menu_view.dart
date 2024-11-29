@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:history_ai/ui/main_screen/main_controller.dart';
@@ -41,9 +42,17 @@ class MenuView extends StatelessWidget {
                     Expanded(
                         child: Column(
                       children: [
-                        commonRow(text: AppConstants.profile.tr, icon: ImageConstant.user),
-                        commonRow(text: AppConstants.settings.tr, icon: ImageConstant.setting),
-                        commonRow(text: AppConstants.helpCenter.tr, icon: ImageConstant.helpCenter,divider: false),
+                        commonRow(onTap: () {}, text: AppConstants.profile.tr, icon: ImageConstant.user),
+                        commonRow(onTap: () {}, text: AppConstants.settings.tr, icon: ImageConstant.setting),
+                        commonRow(onTap: () {}, text: AppConstants.helpCenter.tr, icon: ImageConstant.helpCenter),
+                        commonRow(
+                          onTap: () {
+                            Get.toNamed(RouteConstants.addDataToFirestore);
+                          },
+                          text: "Add data to firestore",
+                          icon: ImageConstant.helpCenter,
+                          divider: false,
+                        ),
                       ],
                     )),
                     Container(
@@ -66,31 +75,34 @@ class MenuView extends StatelessWidget {
         });
   }
 
-  commonRow({required String icon, required String text, bool divider = true}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(width: 8),
-            HeadlineBodyOneBaseWidget(
-              title: text,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              titleColor: ColorConstants.black11,
-            ),
-          ],
-        ),
-        if (divider)
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 32),
-            color: ColorConstants.gray92,
-            height: 1,
-            width: double.infinity,
-          )
-      ],
+  commonRow({required String icon, required String text, bool divider = true, required GestureTapCallback onTap}) {
+    return CommonInkwell(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset(icon),
+              const SizedBox(width: 8),
+              HeadlineBodyOneBaseWidget(
+                title: text,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                titleColor: ColorConstants.black11,
+              ),
+            ],
+          ),
+          if (divider)
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 32),
+              color: ColorConstants.gray92,
+              height: 1,
+              width: double.infinity,
+            )
+        ],
+      ),
     );
   }
 }

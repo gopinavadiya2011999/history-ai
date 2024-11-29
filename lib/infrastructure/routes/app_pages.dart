@@ -1,9 +1,9 @@
 import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/chat/chat_binding.dart';
 import 'package:history_ai/ui/chat/chat_screen.dart';
-
 import 'package:history_ai/ui/main_screen/main_binding.dart';
 import 'package:history_ai/ui/main_screen/main_screen.dart';
+import 'package:history_ai/ui/main_screen/sub_files/add_data_to_firestore.dart';
 import 'package:history_ai/ui/main_screen/sub_files/ask_anything_view.dart';
 import 'package:history_ai/ui/onboarding/create_character/create_character_binding.dart';
 import 'package:history_ai/ui/onboarding/create_character/create_character_screen.dart';
@@ -67,6 +67,11 @@ class AppPages {
       name: RouteConstants.chooseOwnPersonView,
       page: () => const ChooseOwnPersonView(),
       binding: SearchByPersonBinding(),
+    ),
+    GetPage(
+      name: RouteConstants.addDataToFirestore,
+      page: () => const AddDataToFirestore(),
+      binding: MainBinding(),
     ),
   ];
 }
