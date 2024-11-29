@@ -1,7 +1,7 @@
-import 'package:character_ai/inftrastructure/constant/color_constant.dart';
-import 'package:character_ai/ui/common_widgets/common_button.dart';
-import 'package:character_ai/ui/common_widgets/common_inkwell.dart';
-import 'package:character_ai/ui/onboarding/create_character/create_character_controller.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
+import 'package:history_ai/ui/common_widgets/common_button.dart';
+import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
+import 'package:history_ai/ui/onboarding/create_character/create_character_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +45,7 @@ class CharacterPopup extends StatelessWidget {
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                         color: controller.characterModelData[index].selectedCharacter
-                                            ? ThemeColors.primary(context)
+                                            ? ColorConstants.black11
                                             : Colors.transparent,
                                         width: 2)),
                                 child: Image.asset(
@@ -70,7 +70,7 @@ class CharacterPopup extends StatelessWidget {
 
                     buttonText: "Choose",
                     onTap: () {
-                      controller.selectedCharacter = controller.characterModelData.where((element) => element.selectedCharacter).first;
+                      //controller.selectedCharacter = controller.characterModelData.where((element) => element.selectedCharacter).first;
                       controller.update();
                       setState(() {});
                       Get.back();

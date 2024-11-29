@@ -1,7 +1,7 @@
 
 
-import 'package:character_ai/inftrastructure/constant/color_constant.dart';
-import 'package:character_ai/ui/common_widgets/shimmer_package.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
+import 'package:history_ai/ui/common_widgets/shimmer_package.dart';
 import 'package:flutter/material.dart';
 
 class CommonShimmer{
@@ -14,7 +14,7 @@ class CommonShimmer{
         height: height ?? 24,
         margin: margin ?? EdgeInsets.zero,
         width: width ?? 130,
-        decoration: BoxDecoration(color: ColorConstants.blueDd, borderRadius: borderRadius ?? BorderRadius.zero),
+        decoration: BoxDecoration(color: ColorConstants.black11, borderRadius: borderRadius ?? BorderRadius.zero),
       ),
     );
   }}

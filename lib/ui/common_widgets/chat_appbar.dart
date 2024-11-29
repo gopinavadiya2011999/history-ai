@@ -1,9 +1,7 @@
-import 'package:character_ai/inftrastructure/constant/color_constant.dart';
-import 'package:character_ai/ui/common_widgets/headline_body_text.dart';
-import 'package:character_ai/ui/main_controller.dart';
-import 'package:character_ai/ui/onboarding/create_character/create_character_controller.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ChatAppbar extends StatelessWidget {
   const ChatAppbar({super.key});
@@ -14,7 +12,7 @@ class ChatAppbar extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: HeadlineBodyOneBaseWidget(
         title: "Choose character",
-        titleColor: ThemeColors.primary(context),
+        titleColor: ColorConstants.black11,
         fontSize: 32,
         titleTextAlign: TextAlign.center,
 

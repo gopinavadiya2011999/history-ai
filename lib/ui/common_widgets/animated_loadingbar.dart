@@ -1,6 +1,4 @@
-
-import 'package:character_ai/inftrastructure/constant/image_constant.dart';
-import 'package:character_ai/ui/common_widgets/headline_body_text.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:flutter/material.dart';
 
 class RotatingSVG extends StatefulWidget {
@@ -34,21 +32,21 @@ class _RotatingSVGState extends State<RotatingSVG> with SingleTickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AnimatedBuilder(
-            animation: _controller,
-            child: Image.asset(
-              ImageConstant.searchAi,
-              width: 100,
-              height: 100,
-              fit: BoxFit.fill,
-            ),
-            builder: (context, child) {
-              return Transform.rotate(
-                angle: _controller.value * 2.0 * 3.141592653589793,
-                child: child,
-              );
-            },
-          ),
+          // AnimatedBuilder(
+          //   animation: _controller,
+          //   child: Image.asset(
+          //     ImageConstant.searchAi,
+          //     width: 100,
+          //     height: 100,
+          //     fit: BoxFit.fill,
+          //   ),
+          //   builder: (context, child) {
+          //     return Transform.rotate(
+          //       angle: _controller.value * 2.0 * 3.141592653589793,
+          //       child: child,
+          //     );
+          //   },
+          // ),
           const HeadlineBodyOneBaseWidget(title: "Searching...")
         ],
       ),

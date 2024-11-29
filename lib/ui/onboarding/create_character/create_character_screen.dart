@@ -1,13 +1,12 @@
-import 'package:character_ai/inftrastructure/constant/color_constant.dart';
-import 'package:character_ai/inftrastructure/constant/image_constant.dart';
-import 'package:character_ai/inftrastructure/model/user_model.dart';
-import 'package:character_ai/inftrastructure/routes/route_constants.dart';
-import 'package:character_ai/ui/common_widgets/chat_appbar.dart';
-import 'package:character_ai/ui/common_widgets/common_button.dart';
-import 'package:character_ai/ui/common_widgets/common_inkwell.dart';
-import 'package:character_ai/ui/common_widgets/common_text_field.dart';
-import 'package:character_ai/ui/common_widgets/headline_body_text.dart';
-import 'package:character_ai/ui/popups/character_popup.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
+import 'package:history_ai/infrastructure/constant/image_constant.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
+import 'package:history_ai/ui/common_widgets/chat_appbar.dart';
+import 'package:history_ai/ui/common_widgets/common_button.dart';
+import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
+import 'package:history_ai/ui/common_widgets/common_text_field.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
+import 'package:history_ai/ui/popups/character_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,7 +27,7 @@ class CreateCharacterScreen extends GetView<CreateCharacterController> {
             height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(MediaQuery.of(context).platformBrightness == Brightness.dark ? ImageConstant.bgDark : ImageConstant.bgLight),
+                    image: AssetImage(ImageConstant.mainBg),
                     fit: BoxFit.fill)),
             child: SafeArea(
               child: Column(
@@ -50,14 +49,14 @@ class CreateCharacterScreen extends GetView<CreateCharacterController> {
                         children: [
                           const SizedBox(height: 20),
                           CircleAvatar(
-                            backgroundImage: AssetImage(controller.selectedCharacter.characterImage),
+                            // backgroundImage: AssetImage(controller.selectedCharacter),
                             radius: 50,
                           ),
                           const SizedBox(height: 10),
                           HeadlineBodyOneBaseWidget(
                             title: "You can change your character's face\nby tapping on the user image.",
                             titleTextAlign: TextAlign.center,
-                            style: GoogleFonts.inter(color: ThemeColors.primary(context), fontSize: 12, fontWeight: FontWeight.w400),
+                            style: GoogleFonts.inter(color: ColorConstants.black11, fontSize: 12, fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -73,14 +72,14 @@ class CreateCharacterScreen extends GetView<CreateCharacterController> {
                           title: "Select AI voice",
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          titleColor: ThemeColors.primary(context),
+                          titleColor:ColorConstants.black11,
                         ),
                         const SizedBox(height: 8),
                         DropdownButtonFormField<String>(
                           decoration: InputDecoration(
                               isDense: true,
                               filled: true,
-                              fillColor: ColorConstants.purpleCd.withOpacity(0.5),
+                              fillColor:ColorConstants.black11,
                               enabledBorder: commonBorder(context),
                               disabledBorder: commonBorder(context),
                               focusedBorder: commonBorder(context),
@@ -111,20 +110,20 @@ class CreateCharacterScreen extends GetView<CreateCharacterController> {
                         HeadlineBodyOneBaseWidget(
                           title: "AI generates speech in your selected voice.",
                           titleTextAlign: TextAlign.center,
-                          style: GoogleFonts.inter(color: ThemeColors.primary(context), fontSize: 12, fontWeight: FontWeight.w400),
+                          style: GoogleFonts.inter(color: ColorConstants.black11, fontSize: 12, fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(height: 30),
                         CommonButton(
-                          textColor: ThemeColors.secondary(context),
+                          textColor: ColorConstants.black11,
                           buttonText: "Generate character",
-                          fillColor: ThemeColors.primary(context),
+                          fillColor:ColorConstants.black11,
                           onTap: () async {
                             final prefs = await SharedPreferences.getInstance();
-                            final userJson = UserModel(
-                                    name: controller.selectedVoiceName.value.isNotEmpty ? controller.selectedVoiceName.value : "Alloy",
-                                    image: controller.selectedCharacter.characterImage)
-                                .toRawJson();
-                            await prefs.setString('user', userJson);
+                            // final userJson = UserModel(
+                            //         name: controller.selectedVoiceName.value.isNotEmpty ? controller.selectedVoiceName.value : "Alloy",
+                            //         image: controller.selectedCharacter.characterImage)
+                            //     .toRawJson();
+                            // await prefs.setString('user', userJson);
                             prefs.setBool("isLogin", true);
                             Get.offAllNamed(RouteConstants.mainScreen);
                           },

@@ -38,7 +38,7 @@ class HeadlineBodyOneBaseWidget extends StatelessWidget {
     return Text(
       title ?? '',
       style: style ??
-          GoogleFonts.sahitya(
+          GoogleFonts.inter(
             color: foreground == null ? titleColor : null,
             fontSize: fontSize,
             height: height,

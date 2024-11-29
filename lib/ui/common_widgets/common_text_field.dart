@@ -1,87 +1,82 @@
-import 'package:character_ai/inftrastructure/constant/color_constant.dart';
-import 'package:character_ai/ui/common_widgets/common_inkwell.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 
-class CommonTextField extends StatefulWidget {
-  const CommonTextField({super.key, this.maxLines, this.prefixIcon, this.hintText, this.onTap, this.controller, this.onSendTap});
-
+class CommonTextField extends StatelessWidget {
+  const CommonTextField(
+      {super.key,
+      this.maxLines,
+      this.prefixIcon,
+      this.hintText,
+      this.onTap,
+      this.controller,
+      this.labelText,
+      this.suffixIcon,
+      this.obscureText,
+      this.validator});
   final int? maxLines;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final String? hintText;
+  final String? labelText;
+  final bool? obscureText;
   final GestureTapCallback? onTap;
-  final GestureTapCallback? onSendTap;
   final TextEditingController? controller;
-
-  @override
-  State<CommonTextField> createState() => _CommonTextFieldState();
-}
-
-class _CommonTextFieldState extends State<CommonTextField> {
-  bool send = false;
+  final FormFieldValidator<String>? validator;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
-          child: TextFormField(
-            onTap: widget.onTap,
-            keyboardType: TextInputType.multiline,
-            textAlignVertical: TextAlignVertical.center,
-            maxLines: widget.maxLines ?? 1,
-            minLines: 1,
-            controller: widget.controller,
-            onChanged: (value) {
-              if (value.trim().isNotEmpty) {
-                send = true;
-                setState(() {});
-              } else {
-                send = false;
-                setState(() {});
-              }
-            },
-            cursorColor: ThemeColors.primary(context),
-            style: GoogleFonts.sahitya(
-              color: ThemeColors.primary(context),
-              fontSize: 16,
-            ),
-            decoration: InputDecoration(
-              prefixIcon: widget.prefixIcon != null
-                  ? Icon(
-                      widget.prefixIcon,
-                      size: 24,
-                      color: Colors.transparent,
-                    )
-                  : null,
-              border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent, width: 3), borderRadius: BorderRadius.all(Radius.circular(37))),
-              focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)), borderSide: BorderSide(color: Colors.transparent, width: 3)),
-              enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)), borderSide: BorderSide(color: Colors.transparent, width: 3)),
-              disabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)), borderSide: BorderSide(color: Colors.transparent, width: 3)),
-              isDense: true,
-              filled: true,
-              contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-              hintStyle: GoogleFonts.sahitya(
-                color: ThemeColors.primary(context).withOpacity(0.5),
-                fontSize: 16,
-              ),
-              hintText: widget.hintText ?? "",
-              fillColor: ThemeColors.secondary(context).withOpacity(0.15),
+        if (labelText != null)
+          Container(
+            margin: const EdgeInsets.only(left: 5),
+            child: HeadlineBodyOneBaseWidget(
+              title: labelText,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              titleColor: ColorConstants.black10,
             ),
           ),
+        if (labelText != null) const SizedBox(height: 8),
+        TextFormField(
+          obscureText: obscureText ?? false,
+          onTap: onTap,
+          validator: validator,
+          keyboardType: TextInputType.multiline,
+          textAlignVertical: TextAlignVertical.center,
+          maxLines: maxLines ?? 1,
+          minLines: 1,
+          controller: controller,
+          cursorColor: ColorConstants.black11,
+          style: GoogleFonts.inter(
+            color: ColorConstants.black11,
+            fontSize: 16,
+          ),
+          decoration: InputDecoration(
+            suffixIcon: suffixIcon ?? const SizedBox(),
+            prefixIcon: prefixIcon ?? const SizedBox(width: 10),
+            border: commonBorder(context),
+            prefixIconConstraints: BoxConstraints(maxHeight: prefixIcon != null ? 24 : 0, maxWidth: prefixIcon != null ? 42 : 10),
+            suffixIconConstraints: BoxConstraints(maxHeight: suffixIcon != null ? 24 : 0, maxWidth: suffixIcon != null ? 42 : 0),
+            focusedBorder: commonBorder(context),
+            enabledBorder: commonBorder(context),
+            disabledBorder: commonBorder(context),
+            //contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+            hintStyle: GoogleFonts.inter(
+              color: ColorConstants.black87,
+              fontSize: 16,
+            ),
+            hintText: hintText ?? "",
+          ),
         ),
-        const SizedBox(width: 8),
-        CommonInkwell(
-            onTap: widget.onSendTap ?? () {},
-            child: Icon(Icons.send, color: send ? ThemeColors.primary(context) : ThemeColors.primary(context).withOpacity(0.5)))
       ],
     );
   }
 }
 
 commonBorder(BuildContext context) {
-  return OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: ThemeColors.primary(context)));
+  return OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: const BorderSide(color: ColorConstants.grayD6));
 }

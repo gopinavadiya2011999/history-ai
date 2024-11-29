@@ -1,11 +1,15 @@
-import 'package:character_ai/inftrastructure/commons/theme_changer.dart';
-import 'package:character_ai/inftrastructure/routes/route_constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'inftrastructure/routes/app_pages.dart';
-import 'ui/onboarding/splash_screen.dart';
+import 'package:history_ai/infrastructure/firestore/firebase_options.dart';
+import 'package:history_ai/infrastructure/languages/translation_services.dart';
+import 'package:history_ai/infrastructure/routes/app_pages.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
+import 'package:history_ai/ui/main_screen/main_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((FirebaseApp value) {});
   runApp(const MyApp());
 }
 
@@ -14,18 +18,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeController themeController = Get.put(ThemeController());
-    final brightness = MediaQuery.of(context).platformBrightness;
-
-    themeController.applySystemTheme(brightness);
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       enableLog: false,
       getPages: AppPages.routes,
       initialRoute: RouteConstants.splash,
-      theme: themeController.currentTheme.value,
-      home: const SplashScreen(),
+      theme: ThemeData.light(useMaterial3: true),
+      //home: const SplashScreen(),
+      home: const MainScreen(),
+      locale: TranslationService.locale,
+      fallbackLocale: TranslationService.fallbackLocale,
+      translations: TranslationService(),
     );
   }
 }

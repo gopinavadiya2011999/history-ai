@@ -1,5 +1,5 @@
-import 'package:character_ai/inftrastructure/constant/image_constant.dart';
-import 'package:character_ai/inftrastructure/routes/route_constants.dart';
+import 'package:history_ai/infrastructure/constant/image_constant.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (isLogin == true) {
           Get.toNamed(RouteConstants.mainScreen);
         } else {
-          Get.toNamed(RouteConstants.createCharacter);
+          Get.toNamed(RouteConstants.intro);
         }
       },
     );
@@ -36,7 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
       width: double.infinity,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(MediaQuery.of(context).platformBrightness == Brightness.dark ? ImageConstant.bgDark : ImageConstant.bgLight))),
+            fit: BoxFit.fill,
+              image: AssetImage(ImageConstant.splashBg))),
       child: Center(
         child: Lottie.asset(ImageConstant.humanDependsRobot),
       ),
