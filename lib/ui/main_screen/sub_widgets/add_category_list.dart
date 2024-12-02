@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/ui/common_widgets/common_text_field.dart';
 import 'package:history_ai/ui/main_screen/main_controller.dart';
@@ -35,7 +36,7 @@ class AddCategoryList extends StatelessWidget {
                       ], category: TextEditingController()));
                       controller.update();
                     },
-                    title: "Category",
+                    title: AppConstants.category.tr,
                     onTap: () {
                       catItem.isSelected = !catItem.isSelected;
                       controller.update();
@@ -45,7 +46,14 @@ class AddCategoryList extends StatelessWidget {
                   if (catItem.isSelected)
                     Column(
                       children: [
-                        CommonTextField(prefixIcon: const SizedBox(width: 15), controller: catItem.category, hintText: "Enter category"),
+                        CommonTextField(prefixIcon: const SizedBox(width: 15),
+                            validator: (value) {
+                              if(value==null || value.trim().isEmpty){
+                                return AppConstants.addCatHint.tr;
+                              }
+                              return null;
+                            },
+                            controller: catItem.category, hintText: AppConstants.enterCat.tr),
                         const SizedBox(height: 10),
                         AddSubCategoryView(catItem: catItem),
                       ],

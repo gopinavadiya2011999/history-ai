@@ -1,12 +1,15 @@
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/ui/chat/sub_widgets/send_message_view.dart';
 import 'package:history_ai/ui/chat/sub_widgets/user_own_chat_view.dart';
 import 'package:history_ai/ui/chat/sub_widgets/welcome_chat_view.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:history_ai/ui/main_screen/sub_widgets/ask_anything_app_bar.dart';
+import 'package:lottie/lottie.dart';
 import 'chat_controller.dart';
-import 'sub_widgets/ai_response_chat_view.dart';
 
 class ChatScreen extends GetView<ChatController> {
   const ChatScreen({super.key});
@@ -37,13 +40,36 @@ class ChatScreen extends GetView<ChatController> {
                           child: SingleChildScrollView(
                         child: Container(
                           margin: const EdgeInsets.only(top: 14),
-                          child: const Column(
+                          child: Column(
                             children: [
-                              UserOwnChatView(),
-                              SizedBox(height: 24),
-                              AiResponseChatView(),
-                              SizedBox(height: 24),
-
+                              const UserOwnChatView(),
+                              const SizedBox(height: 24),
+                              //AiResponseChatView(),
+                              //SizedBox(height: 24),
+                              if (controller.response != null)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: ColorConstants.black11),
+                                      borderRadius: const BorderRadius.only(
+                                          bottomRight: Radius.circular(16), bottomLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                                  child: Markdown(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    data: controller.response!,
+                                    selectable: true,
+                                  ),
+                                )
+                              else
+                                Center(
+                                    child: Container(
+                                        margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 4.2),
+                                        child: Column(
+                                          children: [
+                                            Lottie.asset(ImageConstant.aiBot, height: 150, width: 150, fit: BoxFit.fill),
+                                            const HeadlineBodyOneBaseWidget(title: "Search something ..."),
+                                          ],
+                                        )))
                             ],
                           ),
                         ),

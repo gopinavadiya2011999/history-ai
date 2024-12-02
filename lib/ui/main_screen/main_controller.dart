@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:history_ai/infrastructure/apis/get_audio_from_ai.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/infrastructure/model/user_model.dart';
@@ -10,13 +11,15 @@ class MainController extends GetxController {
   TextEditingController messageController = TextEditingController();
   String markdownText = '';
   final AudioPlayer audioPlayer = AudioPlayer();
- List <Category> categoryList=[];
+  List<Category> categoryList = [];
   List<CatListTextField> catTextList = [
     CatListTextField(subCategory: [
       SubCategoryTextField(
           subCategory: TextEditingController(), userTextField: [UsersTextField(userName: TextEditingController(), desc: TextEditingController())])
     ], category: TextEditingController())
   ];
+RxBool isUpdating= false.obs;
+
 
   static Future<UserModel?> getUser() async {
     final prefs = await SharedPreferences.getInstance();

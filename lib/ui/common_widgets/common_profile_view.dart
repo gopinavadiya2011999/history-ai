@@ -5,8 +5,8 @@ import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'shimmer_package.dart';
 
 class CommonProfileView extends StatelessWidget {
-  const CommonProfileView({super.key, required this.imageUrl, this.height, this.width});
-  final String imageUrl;
+  const CommonProfileView({super.key,  this.imageUrl, this.height, this.width});
+  final String? imageUrl;
   final double? height;
   final double? width;
   @override
@@ -14,10 +14,20 @@ class CommonProfileView extends StatelessWidget {
     return SizedBox(
         height: height ?? 80,
         width: width ?? 80,
-        child: ClipRRect(
+        child:imageUrl==null && imageUrl!.isEmpty?
+            Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: ColorConstants.grey8B)
+              ),
+              child:const Icon(Icons.person,size: 40),
+            )
+            : ClipRRect(
             borderRadius: BorderRadius.circular(100),
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: imageUrl!,
               fit: BoxFit.cover,
               placeholder: (context, url) {
                 return Shimmer.fromColors(

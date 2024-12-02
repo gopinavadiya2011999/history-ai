@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/firestore/firebase_methods.dart';
@@ -10,8 +12,8 @@ class SearchByPersonController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isHistorySelected = true.obs;
   XFile? file;
+  User? selectedUser ;
   TextEditingController nameController = TextEditingController();
-
 
   pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -21,19 +23,30 @@ class SearchByPersonController extends GetxController {
 
   @override
   void onInit() {
-    isLoading = true.obs;
-    update();
-    FirebaseMethods.fetchAllCategories().then(
-      (value) {
-        if (value != null) {
-          categoryList = value;
-          selectedCategory = categoryList.first;
-        }
-
-        isLoading = false.obs;
-        update();
-      },
-    );
+    fetchDataFromFirestore();
     super.onInit();
+  }
+
+  fetchDataFromFirestore() {
+    try {
+      if (categoryList.isEmpty) {
+        isLoading = true.obs;
+        update();
+      }
+      FirebaseMethods.fetchAllCategories().then(
+        (value) {
+          if (value != null) {
+            categoryList = value;
+            selectedCategory = categoryList.first;
+          }
+          update();
+        },
+      );
+    } catch (error) {
+      log("<<---error--->> $error");
+    } finally {
+      isLoading = false.obs;
+      update();
+    }
   }
 }

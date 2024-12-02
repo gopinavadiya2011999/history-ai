@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
+import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/ui/common_widgets/common_text_field.dart';
 import 'package:history_ai/ui/main_screen/main_controller.dart';
@@ -37,7 +38,7 @@ class AddSubCategoryView extends StatelessWidget {
                           userTextField: [UsersTextField(userName: TextEditingController(), desc: TextEditingController())]));
                       controller.update();
                     },
-                    title: "Sub Category",
+                    title: AppConstants.subCat.tr,
                     onTap: () {
                       subCatItem.isSelected = !subCatItem.isSelected;
                       controller.update();
@@ -47,7 +48,14 @@ class AddSubCategoryView extends StatelessWidget {
                   if (subCatItem.isSelected)
                     Column(
                       children: [
-                        CommonTextField(prefixIcon: const SizedBox(width: 15), controller: subCatItem.subCategory, hintText: "Enter sub category"),
+                        CommonTextField(prefixIcon: const SizedBox(width: 15),
+                            validator: (value) {
+                              if(value==null || value.trim().isEmpty){
+                                return AppConstants.subCatError.tr;
+                              }
+                              return null;
+                            },
+                            controller: subCatItem.subCategory, hintText: AppConstants.subCatHint.tr),
                         AddUsersView(subCatItem: subCatItem)
                       ],
                     ),

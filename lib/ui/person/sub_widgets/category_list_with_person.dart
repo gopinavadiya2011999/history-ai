@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/common_profile_view.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
@@ -108,23 +109,30 @@ class CategoryListWithPerson extends StatelessWidget {
                             children: List.generate(
                               subCategory.users.length,
                               (index) {
-                                return Container(
-                                  margin: const EdgeInsets.only(right: 8),
-                                  constraints: const BoxConstraints(maxWidth: 100),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      const CommonProfileView(imageUrl: 'https://picsum.photos/200/300'),
-                                      const SizedBox(height: 10),
-                                      HeadlineBodyOneBaseWidget(
-                                        title: subCategory.users[index].name,
-                                        titleColor: ColorConstants.black11,
-                                        fontWeight: FontWeight.w600,
-                                        titleTextAlign: TextAlign.center,
-                                        fontSize: 12,
-                                      ),
-                                      const SizedBox(height: 10),
-                                    ],
+                                return CommonInkwell(
+                                   onTap: () {
+                                     controller.selectedUser=subCategory.users[index];
+                                     controller.update();
+                                     Get.toNamed(RouteConstants.personProfileView);
+                                   },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 8),
+                                    constraints: const BoxConstraints(maxWidth: 100),
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(height: 10),
+                                         CommonProfileView(imageUrl:subCategory.users[index].photo ),
+                                        const SizedBox(height: 10),
+                                        HeadlineBodyOneBaseWidget(
+                                          title: subCategory.users[index].name.split(" ").first,
+                                          titleColor: ColorConstants.black11,
+                                          fontWeight: FontWeight.w600,
+                                          titleTextAlign: TextAlign.center,
+                                          fontSize: 12,
+                                        ),
+                                        const SizedBox(height: 10),
+                                      ],
+                                    ),
                                   ),
                                 );
                               },

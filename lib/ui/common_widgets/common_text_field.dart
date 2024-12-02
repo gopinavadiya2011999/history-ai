@@ -14,8 +14,10 @@ class CommonTextField extends StatelessWidget {
       this.labelText,
       this.suffixIcon,
       this.obscureText,
-      this.validator});
+      this.validator, this.radius, this.minLines});
   final int? maxLines;
+  final int? minLines;
+  final double? radius;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? hintText;
@@ -48,7 +50,7 @@ class CommonTextField extends StatelessWidget {
           keyboardType: TextInputType.multiline,
           textAlignVertical: TextAlignVertical.center,
           maxLines: maxLines ?? 1,
-          minLines: 1,
+          minLines: minLines??1,
           controller: controller,
           cursorColor: ColorConstants.black11,
           style: GoogleFonts.inter(
@@ -56,14 +58,15 @@ class CommonTextField extends StatelessWidget {
             fontSize: 16,
           ),
           decoration: InputDecoration(
+
             suffixIcon: suffixIcon ?? const SizedBox(),
             prefixIcon: prefixIcon ?? const SizedBox(width: 10),
-            border: commonBorder(context),
+            border: commonBorder(context,radius:radius),
             prefixIconConstraints: BoxConstraints(maxHeight: prefixIcon != null ? 24 : 0, maxWidth: prefixIcon != null ? 42 : 10),
             suffixIconConstraints: BoxConstraints(maxHeight: suffixIcon != null ? 24 : 0, maxWidth: suffixIcon != null ? 42 : 0),
-            focusedBorder: commonBorder(context),
-            enabledBorder: commonBorder(context),
-            disabledBorder: commonBorder(context),
+            focusedBorder: commonBorder(context,radius:radius),
+            enabledBorder: commonBorder(context,radius:radius),
+            disabledBorder: commonBorder(context,radius:radius),
             //contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
             hintStyle: GoogleFonts.inter(
               color: ColorConstants.black87,
@@ -77,6 +80,7 @@ class CommonTextField extends StatelessWidget {
   }
 }
 
-commonBorder(BuildContext context) {
-  return OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: const BorderSide(color: ColorConstants.grayD6));
+commonBorder(BuildContext context,{double ?radius}) {
+  return OutlineInputBorder(borderRadius: BorderRadius.circular(radius??100),
+      borderSide: const BorderSide(color: ColorConstants.grayD6));
 }

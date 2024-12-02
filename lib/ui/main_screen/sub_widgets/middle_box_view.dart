@@ -8,6 +8,7 @@ import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:history_ai/ui/main_screen/sub_widgets/image_data_box.dart';
+import 'package:history_ai/ui/person/search_by_person_controller.dart';
 
 class MiddleBoxView extends StatelessWidget {
   const MiddleBoxView({super.key});
@@ -89,6 +90,7 @@ class MiddleBoxView extends StatelessWidget {
                     Expanded(
                         child: ImageDataBox(
                           onTap: () {
+                            Get.put(SearchByPersonController()).fetchDataFromFirestore();
                             Get.toNamed(RouteConstants.choosePersonOptionScreen);
                           },
                       icon: ImageConstant.person,

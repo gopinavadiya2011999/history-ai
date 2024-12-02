@@ -36,15 +36,15 @@ class SearchByPersonView extends GetView<SearchByPersonController> {
                                 color: ColorConstants.black11,
                               ),
                             )
-                          : controller.categoryList.isNotEmpty
-                              ? const CategoryListWithPerson()
-                              :  Center(
+                          : controller.categoryList.isEmpty
+                              ? Center(
                                   child: HeadlineBodyOneBaseWidget(
                                     title: AppConstants.noDataFound.tr,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                ))
+                                )
+                              : const CategoryListWithPerson())
                 ],
               ),
             ),

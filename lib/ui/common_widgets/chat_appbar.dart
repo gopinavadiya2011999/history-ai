@@ -10,7 +10,7 @@ class ChatAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: HeadlineBodyOneBaseWidget(
+      child: const HeadlineBodyOneBaseWidget(
         title: "Choose character",
         titleColor: ColorConstants.black11,
         fontSize: 32,

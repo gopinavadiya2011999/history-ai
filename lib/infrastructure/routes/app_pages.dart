@@ -17,6 +17,8 @@ import 'package:history_ai/ui/person/search_by_person_view.dart';
 import 'package:history_ai/ui/person/sub_files/choose_own_person.dart';
 import 'package:history_ai/ui/person/sub_files/choose_person_option_view.dart';
 
+import '../../ui/person/sub_widgets/person_profile_view.dart';
+
 class AppPages {
   static final routes = [
     GetPage(
@@ -72,6 +74,11 @@ class AppPages {
       name: RouteConstants.addDataToFirestore,
       page: () => const AddDataToFirestore(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: RouteConstants.personProfileView,
+      page: () => const PersonProfileView(),
+      binding: SearchByPersonBinding(),
     ),
   ];
 }

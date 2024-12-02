@@ -61,5 +61,20 @@ const Map<String, String> en = {
   "no_data_found":"No data found",
   "choose_one":"Choose one of them for chat",
   "historical_chat":"Chat with Historical Figures",
-  "own_conversion":"Create Your Own Conversation"
+  "own_conversion":"Create Your Own Conversation",
+  "lets_chat":"Let's Chat",
+  "add_category":"Add categories",
+  "done":"Done",
+  "category":"Category",
+  "add_cat_hint":"Please enter category",
+  "enter_cat":"Enter category",
+  "sub_cat":"Sub Category",
+  "sub_cat_error":"Please enter sub category",
+  "sub_cat_hint":"Enter sub category",
+  "users":"Users",
+  "name_error":"Please enter name",
+  "name_hint":"Enter your choice of name",
+  "desc_error":"Please enter description",
+  "desc_hint":"Enter descriptive detail"
+
 };

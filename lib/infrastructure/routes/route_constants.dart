@@ -10,4 +10,5 @@ class RouteConstants{
   static const  String choosePersonOptionScreen='/choosePersonOptionScreen';
   static const  String chooseOwnPersonView='/chooseOwnPersonView';
   static const  String addDataToFirestore='/addDataToFirestore';
+  static const  String personProfileView='/personProfileView';
 }

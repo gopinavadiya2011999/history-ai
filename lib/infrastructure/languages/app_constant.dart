@@ -62,5 +62,19 @@ class AppConstants{
   static const String chooseOne = "choose_one";
   static const String historicalChat = "historical_chat";
   static const String ownConversion = "own_conversion";
+  static const String letsChat = "lets_chat";
+  static const String addCategory = "add_category";
+  static const String done = "done";
+  static const String category = "category";
+  static const String addCatHint = "add_cat_hint";
+  static const String enterCat = "enter_cat";
+  static const String subCat = "sub_cat";
+  static const String subCatError = "sub_cat_error";
+  static const String subCatHint = "sub_cat_hint";
+  static const String users = "users";
+  static const String nameError = "name_error";
+  static const String nameHint = "name_hint";
+  static const String descError = "desc_error";
+  static const String descHint = "desc_hint";
 
 }
