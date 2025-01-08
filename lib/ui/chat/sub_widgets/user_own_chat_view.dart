@@ -26,8 +26,8 @@ class UserOwnChatView extends StatelessWidget {
                         topLeft: Radius.circular(16)
                     )
                 ),
-                child: const HeadlineBodyOneBaseWidget(
-                  title:"Beri saya rekomendasi makanan terenak yang ada di Lombok",
+                child:  HeadlineBodyOneBaseWidget(
+                  title:controller.message,
                   titleColor: ColorConstants.black11,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,

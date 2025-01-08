@@ -4,6 +4,7 @@ import 'package:history_ai/ui/chat/chat_screen.dart';
 import 'package:history_ai/ui/main_screen/main_binding.dart';
 import 'package:history_ai/ui/main_screen/main_screen.dart';
 import 'package:history_ai/ui/main_screen/sub_files/add_data_to_firestore.dart';
+import 'package:history_ai/ui/main_screen/sub_files/add_place_data_to_firestore.dart';
 import 'package:history_ai/ui/main_screen/sub_files/ask_anything_view.dart';
 import 'package:history_ai/ui/onboarding/create_character/create_character_binding.dart';
 import 'package:history_ai/ui/onboarding/create_character/create_character_screen.dart';
@@ -14,8 +15,11 @@ import 'package:history_ai/ui/onboarding/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/ui/person/search_by_person_binding.dart';
 import 'package:history_ai/ui/person/search_by_person_view.dart';
+import 'package:history_ai/ui/person/searh_by_place_view.dart';
 import 'package:history_ai/ui/person/sub_files/choose_own_person.dart';
 import 'package:history_ai/ui/person/sub_files/choose_person_option_view.dart';
+import 'package:history_ai/ui/person/sub_files/choose_place_option_view.dart';
+import 'package:history_ai/ui/person/sub_widgets/place_view.dart';
 
 import '../../ui/person/sub_widgets/person_profile_view.dart';
 
@@ -61,8 +65,18 @@ class AppPages {
       binding: SearchByPersonBinding(),
     ),
     GetPage(
+      name: RouteConstants.searchByPlaceView,
+      page: () => const SearchByPlaceView(),
+      binding: SearchByPersonBinding(),
+    ),
+    GetPage(
       name: RouteConstants.choosePersonOptionScreen,
       page: () => const ChoosePersonOptionView(),
+      binding: SearchByPersonBinding(),
+    ),
+    GetPage(
+      name: RouteConstants.choosePlaceOptionView,
+      page: () => const ChoosePlaceOptionView(),
       binding: SearchByPersonBinding(),
     ),
     GetPage(
@@ -74,10 +88,19 @@ class AppPages {
       name: RouteConstants.addDataToFirestore,
       page: () => const AddDataToFirestore(),
       binding: MainBinding(),
+    ), GetPage(
+      name: RouteConstants.addPlaceDataFirestore,
+      page: () => const AddPlaceDataToFirestore(),
+      binding: MainBinding(),
     ),
     GetPage(
       name: RouteConstants.personProfileView,
       page: () => const PersonProfileView(),
+      binding: SearchByPersonBinding(),
+    ),
+    GetPage(
+      name: RouteConstants.placeView,
+      page: () => const PlaceView(),
       binding: SearchByPersonBinding(),
     ),
   ];

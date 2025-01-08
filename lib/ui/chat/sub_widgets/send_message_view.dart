@@ -27,12 +27,14 @@ class SendMessageView extends StatelessWidget {
                   suffixIcon: CommonInkwell(
                       onTap: () async {
                         controller.isMessageSending = true.obs;
+                        controller.message = controller.messageController.text.trim();
                         controller.update();
-                        await ApiMethods.getTextFromAI(
+                       controller.response= await ApiMethods.getTextFromAI(
                             text: controller.messageController.text.trim(),
                             userName: controller.selectedUser!.name,
                             userDetail: controller.selectedCategory!.name);
                         controller.isMessageSending = false.obs;
+                        controller.messageController.clear();
                         controller.update();
                       },
                       child: Container(

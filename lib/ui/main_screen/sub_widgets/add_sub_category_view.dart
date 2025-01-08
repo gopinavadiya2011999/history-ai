@@ -9,8 +9,8 @@ import 'package:history_ai/ui/main_screen/sub_widgets/add_users_view.dart';
 import 'package:history_ai/ui/main_screen/sub_widgets/common_title_add_view.dart';
 
 class AddSubCategoryView extends StatelessWidget {
-  const AddSubCategoryView({super.key, required this.catItem});
-
+  const AddSubCategoryView({super.key, required this.catItem, required this.fromPlace});
+final bool fromPlace;
   final CatListTextField catItem;
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class AddSubCategoryView extends StatelessWidget {
                               return null;
                             },
                             controller: subCatItem.subCategory, hintText: AppConstants.subCatHint.tr),
-                        AddUsersView(subCatItem: subCatItem)
+                        AddUsersView(subCatItem: subCatItem,fromPlace:fromPlace)
                       ],
                     ),
                 ],

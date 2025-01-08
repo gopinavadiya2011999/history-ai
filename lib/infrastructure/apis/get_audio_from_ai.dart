@@ -8,7 +8,7 @@ class ApiMethods {
     //"You are Arjuna from the Mahabharata. Respond to the following message as Arjuna would talk..User's message: $text"
     final response = await http.post(
       Uri.parse(
-          'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyD8MDsuIV6ymQrmi3G_-h7LuGa9ZYksjqc'),
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCTQ0O4Zsm0Ul4nT93YYHIda3CHZfDXmb0'),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,10 +23,8 @@ class ApiMethods {
         ]
       }),
     );
-    print("response::: ${response.statusCode}");
-    print("response::: ${response.body}");
     if (response.statusCode == 200) {
-      return '';
+      return json.decode(response.body)['candidates'][0]['content']['parts'][0]['text'];
     } else {
       throw Exception('Failed to generate audio');
     }

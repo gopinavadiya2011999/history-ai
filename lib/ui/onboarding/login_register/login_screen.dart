@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
-import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/common_widgets/common_button.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/common_text_field.dart';
@@ -110,11 +109,11 @@ class LoginScreen extends GetView<LoginRegisterController> {
                     )),
                     const SizedBox(height: 15),
                     CommonButton(
-                      onTap: () {
+                      progressColor: Colors.white,
+                      isLoading: controller.isLoginLoading.value,
+                      onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display proceed.
-                          Get.toNamed(RouteConstants.mainScreen);
-
+                          await controller.loginUser(context: context);
                         }
                       },
                       buttonText: AppConstants.login.tr,
@@ -129,6 +128,7 @@ class LoginScreen extends GetView<LoginRegisterController> {
                             text: AppConstants.registerNow.tr,
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
+                              controller.clearControllers();
                                 Get.to(const RegisterScreen());
                               },
                             style: GoogleFonts.inter(

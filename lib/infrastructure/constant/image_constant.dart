@@ -6,6 +6,36 @@ class ImageConstant{
   static String placeBg = 'assets/pngs/place_bg.png';
   static String historyBg = 'assets/pngs/history_bg.png';
   static String chatTopBg = 'assets/pngs/chat_top_bg.png';
+  static String activeMen = 'assets/pngs/active-men.png';
+  static String ballerina = 'assets/pngs/ballerina.png';
+  static String baseballPlayer = 'assets/pngs/baseball-player.png';
+  static String beardedMen = 'assets/pngs/bearded-men.png';
+
+  static String biologist = 'assets/pngs/biologist.png';
+  static String cheerfulMen = 'assets/pngs/cheerful-men.png';
+  static String cuteGirl = 'assets/pngs/cute-girl.png';
+  static String entrepreneurGirl = 'assets/pngs/entrepreneur-girl.png';
+  static String entrepreneurMen = 'assets/pngs/entrepreneur-men.png';
+  static String freeMan = 'assets/pngs/freeman.png';
+  static String funBoy = 'assets/pngs/fun-boy.png';
+  static String girlWithHeadBand = 'assets/pngs/girl-with-headband.png';
+  static String girlWithRedCloth = 'assets/pngs/girl-with-red-cloth.png';
+  static String handsomeBoy = 'assets/pngs/handsome-boy.png';
+  static String happyMen = 'assets/pngs/happy-men.png';
+  static String happyWomen = 'assets/pngs/happy-woman.png';
+  static String innocentMen = 'assets/pngs/innocent-men.png';
+  static String longHairMen = 'assets/pngs/long-hair-men.png';
+  static String menWithBeanie = 'assets/pngs/men-with-beanie.png';
+  static String menWithRedCloth = 'assets/pngs/men-with-red-cloth.png';
+  static String neatMen = 'assets/pngs/neat-men.png';
+  static String pinkyGirl = 'assets/pngs/pinky-girl.png';
+  static String shortHairGirl = 'assets/pngs/short-hair-girl.png';
+  static String smileyBoy = 'assets/pngs/smiley-boy.png';
+  static String smileyGirl = 'assets/pngs/smiley-girl.png';
+  static String tennisPlayer = 'assets/pngs/tennis-player.png';
+  static String trendyBoy = 'assets/pngs/trendy-boy.png';
+  static String womanEmployee = 'assets/pngs/woman-employee.png';
+  static String zooKeeper = 'assets/pngs/zoo-keeper.png';
   //svg images
   static String appLogo = 'assets/svgs/app_logo.svg';
   static String arrowLong = 'assets/svgs/arrow_long.svg';

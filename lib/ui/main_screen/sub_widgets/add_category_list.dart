@@ -8,7 +8,8 @@ import 'package:history_ai/ui/main_screen/sub_widgets/add_sub_category_view.dart
 import 'package:history_ai/ui/main_screen/sub_widgets/common_title_add_view.dart';
 
 class AddCategoryList extends StatelessWidget {
-  const AddCategoryList({super.key});
+  const AddCategoryList({super.key, required this.fromPlace});
+final bool fromPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +47,18 @@ class AddCategoryList extends StatelessWidget {
                   if (catItem.isSelected)
                     Column(
                       children: [
-                        CommonTextField(prefixIcon: const SizedBox(width: 15),
+                        CommonTextField(
+                            prefixIcon: const SizedBox(width: 15),
                             validator: (value) {
-                              if(value==null || value.trim().isEmpty){
+                              if (value == null || value.trim().isEmpty) {
                                 return AppConstants.addCatHint.tr;
                               }
                               return null;
                             },
-                            controller: catItem.category, hintText: AppConstants.enterCat.tr),
+                            controller: catItem.category,
+                            hintText: AppConstants.enterCat.tr),
                         const SizedBox(height: 10),
-                        AddSubCategoryView(catItem: catItem),
+                        AddSubCategoryView(catItem: catItem,fromPlace:fromPlace),
                       ],
                     )
                 ],

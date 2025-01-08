@@ -61,6 +61,7 @@ const Map<String, String> en = {
   "no_data_found":"No data found",
   "choose_one":"Choose one of them for chat",
   "historical_chat":"Chat with Historical Figures",
+  "place_chat":"Chat related places",
   "own_conversion":"Create Your Own Conversation",
   "lets_chat":"Let's Chat",
   "add_category":"Add categories",
@@ -75,6 +76,8 @@ const Map<String, String> en = {
   "name_error":"Please enter name",
   "name_hint":"Enter your choice of name",
   "desc_error":"Please enter description",
-  "desc_hint":"Enter descriptive detail"
+  "desc_hint":"Enter descriptive detail",
+  "add_firestore":"Add user data to firestore",
+  "add_place":"Add place data to firestore"
 
 };

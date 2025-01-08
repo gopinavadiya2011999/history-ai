@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CommonButton extends StatelessWidget {
-  const CommonButton({super.key, required this.buttonText, required this.onTap, this.fillColor, this.textColor, this.isLoading = false});
+  const CommonButton({super.key, required this.buttonText, required this.onTap, this.fillColor, this.textColor, this.isLoading = false, this.progressColor});
   final String buttonText;
   final Color? fillColor;
   final Color? textColor;
+  final Color? progressColor;
   final bool isLoading;
   final GestureTapCallback onTap;
   @override
@@ -26,8 +27,8 @@ class CommonButton extends StatelessWidget {
             ? Center(
                 child: Transform.scale(
                   scale: 0.8,
-                  child: const CircularProgressIndicator(
-                    color: ColorConstants.black11,
+                  child:  CircularProgressIndicator(
+                    color: progressColor??ColorConstants.black11,
                   ),
                 ),
               )

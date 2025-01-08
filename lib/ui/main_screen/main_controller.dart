@@ -1,5 +1,4 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:history_ai/infrastructure/apis/get_audio_from_ai.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/infrastructure/model/user_model.dart';
@@ -11,28 +10,27 @@ class MainController extends GetxController {
   TextEditingController messageController = TextEditingController();
   String markdownText = '';
   final AudioPlayer audioPlayer = AudioPlayer();
-  List<Category> categoryList = [];
+  UserModel? userModel;
   List<CatListTextField> catTextList = [
     CatListTextField(subCategory: [
       SubCategoryTextField(
           subCategory: TextEditingController(), userTextField: [UsersTextField(userName: TextEditingController(), desc: TextEditingController())])
     ], category: TextEditingController())
   ];
-RxBool isUpdating= false.obs;
+  RxBool isUpdating = false.obs;
 
-
-  static Future<UserModel?> getUser() async {
+  Future<UserModel?> getUserModel() async {
     final prefs = await SharedPreferences.getInstance();
-    final userJson = prefs.getString('user');
-    if (userJson != null) {
-      return UserModel.fromRawJson(userJson);
-    }
-    return null;
+    String? userJson = prefs.getString("userDetail");
+
+    if (userJson == null) return null;
+
+    return UserModel.fromRawJson(userJson);
   }
 
   @override
   Future<void> onInit() async {
-    // userModel=await  getUser();
+    userModel = await getUserModel();
     update();
     super.onInit();
   }

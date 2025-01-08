@@ -1,19 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
-import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/common_text_field.dart';
 import 'package:history_ai/ui/main_screen/main_controller.dart';
 import 'package:history_ai/ui/main_screen/sub_widgets/common_title_add_view.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddUsersView extends StatelessWidget {
-  const AddUsersView({super.key, required this.subCatItem});
+  const AddUsersView({super.key, required this.subCatItem, required this.fromPlace});
   final SubCategoryTextField subCatItem;
+  final bool fromPlace;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
@@ -39,7 +36,7 @@ class AddUsersView extends StatelessWidget {
                       subCatItem.userTextField.add(UsersTextField(userName: TextEditingController(), desc: TextEditingController()));
                       controller.update();
                     },
-                    title: AppConstants.users.tr,
+                    title: fromPlace ? "Places" : AppConstants.users.tr,
                     onTap: () {
                       userItem.isSelected = !userItem.isSelected;
                       controller.update();
@@ -98,7 +95,7 @@ class AddUsersView extends StatelessWidget {
                             hintText: AppConstants.nameHint.tr),
                         const SizedBox(height: 10),
                         CommonTextField(
-                          radius: 10,
+                            radius: 10,
                             maxLines: 10,
                             minLines: 4,
                             prefixIcon: const SizedBox(width: 15),

@@ -1,17 +1,18 @@
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/ui/common_widgets/common_button.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
-import 'package:history_ai/ui/onboarding/create_character/create_character_controller.dart';
+import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:history_ai/ui/onboarding/login_register/login_register_controller.dart';
 
 class CharacterPopup extends StatelessWidget {
   const CharacterPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CreateCharacterController>(
-      init: CreateCharacterController(),
+    return GetBuilder<LoginRegisterController>(
+      init: LoginRegisterController(),
       builder: (controller) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
@@ -27,38 +28,67 @@ class CharacterPopup extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
                         children: List.generate(
-                          controller.characterModelData.length,
-                          (index) {
+                          controller.charImageData.length,
+                              (index) {
                             return CommonInkwell(
                               onTap: () {
-                                for (var element in controller.characterModelData) {
+                                for (var element in controller.charImageData) {
                                   element.selectedCharacter = false;
                                 }
-                                controller.characterModelData[index].selectedCharacter = !controller.characterModelData[index].selectedCharacter;
+                                controller.charImageData[index].selectedCharacter =
+                                !controller.charImageData[index].selectedCharacter;
                                 controller.update();
                                 setState(() {});
                               },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minWidth: 80,
+                                  maxWidth: 100,
+                                ),
+                                child: Container(
+                                  padding:  EdgeInsets.all(controller.charImageData[index].selectedCharacter?3:0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                        color: controller.characterModelData[index].selectedCharacter
-                                            ? ColorConstants.black11
-                                            : Colors.transparent,
-                                        width: 2)),
-                                child: Image.asset(
-                                  controller.characterModelData[index].characterImage,
-                                  width: 50,
-                                  height: 50,
+                                      color: controller.charImageData[index].selectedCharacter
+                                          ? ColorConstants.black11
+                                          : Colors.transparent,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        controller.charImageData[index].photo,
+                                        width: 50,
+                                        height: 50,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      HeadlineBodyOneBaseWidget(
+                                        title: controller.charImageData[index].name,
+                                        fontSize: 10,
+                                        maxLine: 2,
+                                         fontWeight: FontWeight.w500,
+                                         textOverflow: TextOverflow.ellipsis,
+                                        titleTextAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
                           },
                         ),
                       ),
-                    ),
+                    )
+                    ,
                   ),
                 ],
               ),
@@ -67,10 +97,9 @@ class CharacterPopup extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
                 child: CommonButton(
-
                     buttonText: "Choose",
                     onTap: () {
-                      //controller.selectedCharacter = controller.characterModelData.where((element) => element.selectedCharacter).first;
+                      controller.selectedCharacter = controller.charImageData.where((element) => element.selectedCharacter).first;
                       controller.update();
                       setState(() {});
                       Get.back();

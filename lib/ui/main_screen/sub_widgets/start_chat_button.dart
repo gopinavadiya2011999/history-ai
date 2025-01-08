@@ -15,7 +15,7 @@ class StartChatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonInkwell(
-      onTap: () => Get.toNamed(RouteConstants.askAnything),
+      onTap: () => Get.toNamed(RouteConstants.chatScreen)/*Get.toNamed(RouteConstants.askAnything)*/,
       child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.all(8),

@@ -4,9 +4,10 @@ import 'package:history_ai/infrastructure/model/hostory_model.dart';
 
 class ChatController extends GetxController {
   User? selectedUser;
-  Category?selectedCategory ;
-  String ?response;
+  Category? selectedCategory;
+  String? response;
+  String? message;
 
   TextEditingController messageController = TextEditingController();
-  RxBool isMessageSending =false.obs;
+  RxBool isMessageSending = false.obs;
 }

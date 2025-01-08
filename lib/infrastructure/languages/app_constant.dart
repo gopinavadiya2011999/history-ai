@@ -1,5 +1,5 @@
-class AppConstants{
-  static const String appTitle = "app_title";
+ class AppConstants{
+   static const String appTitle = "app_title";
   static const String title = "title";
   static const String description = "description";
   static const String getStarted = "get_started";
@@ -61,6 +61,7 @@ class AppConstants{
   static const String noDataFound = "no_data_found";
   static const String chooseOne = "choose_one";
   static const String historicalChat = "historical_chat";
+  static const String placeChat = "place_chat";
   static const String ownConversion = "own_conversion";
   static const String letsChat = "lets_chat";
   static const String addCategory = "add_category";
@@ -76,5 +77,7 @@ class AppConstants{
   static const String nameHint = "name_hint";
   static const String descError = "desc_error";
   static const String descHint = "desc_hint";
+  static const String addFirestore = "add_firestore";
+  static const String addPlace = "add_place";
 
 }

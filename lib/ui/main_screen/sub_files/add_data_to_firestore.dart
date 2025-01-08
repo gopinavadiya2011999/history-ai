@@ -50,7 +50,7 @@ class AddDataToFirestore extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       const Expanded(
-                        child: AddCategoryList(),
+                        child: AddCategoryList(fromPlace: false),
                       ),
                       CommonButton(
                         buttonText: AppConstants.done.tr,

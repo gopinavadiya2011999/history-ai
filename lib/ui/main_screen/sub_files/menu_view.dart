@@ -5,6 +5,7 @@ import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
 import 'package:history_ai/infrastructure/routes/route_constants.dart';
+import 'package:history_ai/main.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:history_ai/ui/main_screen/main_controller.dart';
@@ -46,25 +47,38 @@ class MenuView extends StatelessWidget {
                         commonRow(onTap: () {}, text: AppConstants.settings.tr, icon: ImageConstant.setting),
                         commonRow(onTap: () {}, text: AppConstants.helpCenter.tr, icon: ImageConstant.helpCenter),
                         commonRow(
-                          onTap: () {
-                            Get.toNamed(RouteConstants.addDataToFirestore);
-                          },
-                          text: "Add data to firestore",
-                          icon: ImageConstant.helpCenter,
-                          divider: false,
-                        ),
+                            onTap: () {
+                              Get.toNamed(RouteConstants.addDataToFirestore);
+                            },
+                            text: AppConstants.addFirestore.tr,
+                            icon: ImageConstant.helpCenter),
+                        commonRow(
+                            onTap: () {
+                              Get.toNamed(RouteConstants.addPlaceDataFirestore);
+                            },
+                            text: AppConstants.addPlace.tr,
+                            icon: ImageConstant.helpCenter,
+                            divider: false),
                       ],
                     )),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(border: Border.all(color: ColorConstants.grayD8), borderRadius: BorderRadius.circular(50)),
-                      child: HeadlineBodyOneBaseWidget(
-                        title: AppConstants.logOut.tr,
-                        titleTextAlign: TextAlign.center,
-                        titleColor: ColorConstants.black11,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
+                    CommonInkwell(
+                      onTap: () {
+                        preferences?.remove('isLogin');
+                        preferences?.remove('userDetail');
+                        Get.toNamed(RouteConstants.intro);
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(border: Border.all(color: ColorConstants.grayD8),
+                            borderRadius: BorderRadius.circular(50)),
+                        child: HeadlineBodyOneBaseWidget(
+                          title: AppConstants.logOut.tr,
+                          titleTextAlign: TextAlign.center,
+                          titleColor: ColorConstants.black11,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                        ),
                       ),
                     )
                   ],

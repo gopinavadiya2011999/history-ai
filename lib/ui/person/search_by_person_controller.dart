@@ -1,25 +1,27 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/firestore/firebase_methods.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:history_ai/infrastructure/model/place_model.dart';
 
 class SearchByPersonController extends GetxController {
   List<Category> categoryList = [];
+  List<Places> placeList = [];
   Category? selectedCategory;
+  Places? selectedPlace;
   RxBool isLoading = false.obs;
   RxBool isHistorySelected = true.obs;
-  XFile? file;
-  User? selectedUser ;
-  TextEditingController nameController = TextEditingController();
+  RxBool isPlaceSelected = true.obs;
+  TextEditingController categoryController = TextEditingController();
 
-  pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    file = await picker.pickImage(source: ImageSource.gallery);
-    update();
-  }
+  User? selectedUser ;
+  City? selectedCity;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+
 
   @override
   void onInit() {
@@ -42,6 +44,28 @@ class SearchByPersonController extends GetxController {
           update();
         },
       );
+    } catch (error) {
+      log("<<---error--->> $error");
+    } finally {
+      isLoading = false.obs;
+      update();
+    }
+  }
+
+  fetchPlaceDataFromFirestore() {
+    try {
+      if (placeList.isEmpty) {
+        isLoading = true.obs;
+        update();
+      }
+      FirebaseMethods.fetchAllPlaceCategories().then((value) {
+        if (value != null) {
+          placeList = value;
+          selectedPlace = placeList.first;
+        }
+        update();
+      },);
+
     } catch (error) {
       log("<<---error--->> $error");
     } finally {

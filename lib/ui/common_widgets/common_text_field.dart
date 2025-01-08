@@ -6,6 +6,7 @@ import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 class CommonTextField extends StatelessWidget {
   const CommonTextField(
       {super.key,
+        this.textCapitalization,
       this.maxLines,
       this.prefixIcon,
       this.hintText,
@@ -24,6 +25,7 @@ class CommonTextField extends StatelessWidget {
   final String? labelText;
   final bool? obscureText;
   final GestureTapCallback? onTap;
+  final TextCapitalization ?textCapitalization;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   @override
@@ -46,6 +48,7 @@ class CommonTextField extends StatelessWidget {
         TextFormField(
           obscureText: obscureText ?? false,
           onTap: onTap,
+          textCapitalization:textCapitalization??  TextCapitalization.none,
           validator: validator,
           keyboardType: TextInputType.multiline,
           textAlignVertical: TextAlignVertical.center,

@@ -20,34 +20,18 @@ class MiddleBoxView extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: ColorConstants.black11)),
       child: Column(
         children: [
+          const SizedBox(height: 20),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
               children: [
+                SvgPicture.asset(ImageConstant.chatIcon),
+                const SizedBox(width: 12),
                 HeadlineBodyOneBaseWidget(
-                  title: AppConstants.voiceRecognition.tr,
-                  style: GoogleFonts.archivo(color: ColorConstants.black11, fontSize: 12, fontWeight: FontWeight.w600),
+                  title: AppConstants.letsChat.tr,
+                  style: GoogleFonts.archivo(color: ColorConstants.black, fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-                Row(
-                  children: [
-                    SvgPicture.asset(ImageConstant.voice),
-                    const SizedBox(width: 8),
-                    HeadlineBodyOneBaseWidget(
-                      title: AppConstants.voiceAi.tr,
-                      style: GoogleFonts.archivo(color: ColorConstants.black11, fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                    const Spacer(),
-                    Container(
-                      decoration: BoxDecoration(color: ColorConstants.green6BB, borderRadius: BorderRadius.circular(60)),
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                      child: HeadlineBodyOneBaseWidget(
-                        title: AppConstants.startRecording.tr,
-                        style: GoogleFonts.archivo(color: ColorConstants.black, fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                ),
+
               ],
             ),
           ),
@@ -80,7 +64,10 @@ class MiddleBoxView extends StatelessWidget {
                   children: [
                     Expanded(
                         child: ImageDataBox(
-
+                          onTap: () {
+                            Get.put(SearchByPersonController()).fetchPlaceDataFromFirestore();
+                            Get.toNamed(RouteConstants.choosePlaceOptionView);
+                            },
                       icon: ImageConstant.placeHistory,
                       desc: AppConstants.searchByPlace.tr,
                       bgImage: ImageConstant.placeBg,

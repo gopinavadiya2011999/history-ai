@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (isLogin == true) {
           Get.toNamed(RouteConstants.mainScreen);
         } else {
+
           Get.toNamed(RouteConstants.intro);
         }
       },
@@ -34,10 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-              image: AssetImage(ImageConstant.splashBg))),
+      decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.fill, image: AssetImage(ImageConstant.splashBg))),
       child: Center(
         child: Lottie.asset(ImageConstant.humanDependsRobot),
       ),

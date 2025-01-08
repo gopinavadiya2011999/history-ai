@@ -68,6 +68,8 @@ class PersonProfileView extends StatelessWidget {
                       onTap: () {
                         ChatController chatController = Get.put(ChatController());
                         chatController.selectedUser = controller.selectedUser;
+                        chatController.message = null;
+                        chatController.response = null;
                         chatController.selectedCategory = controller.selectedCategory;
                         chatController.update();
                         Get.toNamed(RouteConstants.chatScreen);

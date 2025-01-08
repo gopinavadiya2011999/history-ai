@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Category {
   final String id;
@@ -99,7 +100,7 @@ class SubCategoryTextField {
 class UsersTextField {
   TextEditingController userName;
   TextEditingController desc;
-  XFile? userPhoto;
+  File/*XFile*/? userPhoto;
   bool isSelected;
   UsersTextField({this.isSelected = true, required this.userName, required this.desc, this.userPhoto});
 }
