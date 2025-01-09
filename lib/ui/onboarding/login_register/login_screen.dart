@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:history_ai/infrastructure/languages/app_constant.dart';
+import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/ui/common_widgets/common_button.dart';
 import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/common_text_field.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
 import 'package:history_ai/ui/onboarding/login_register/login_register_controller.dart';
-import 'package:history_ai/ui/onboarding/login_register/register_screen.dart';
 import 'package:history_ai/ui/onboarding/widgets/common_logo_text_view.dart';
 
 class LoginScreen extends GetView<LoginRegisterController> {
@@ -60,6 +60,7 @@ class LoginScreen extends GetView<LoginRegisterController> {
                             ),
                             const SizedBox(height: 24),
                             CommonTextField(
+                              controller: controller.emailController,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return "Please enter email";
@@ -77,6 +78,7 @@ class LoginScreen extends GetView<LoginRegisterController> {
                             ),
                             const SizedBox(height: 16),
                             CommonTextField(
+                              controller: controller.passwordController,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return "Please enter password";
@@ -112,6 +114,7 @@ class LoginScreen extends GetView<LoginRegisterController> {
                       progressColor: Colors.white,
                       isLoading: controller.isLoginLoading.value,
                       onTap: () async {
+                        FocusScope.of(context).unfocus();
                         if (_formKey.currentState!.validate()) {
                           await controller.loginUser(context: context);
                         }
@@ -129,7 +132,7 @@ class LoginScreen extends GetView<LoginRegisterController> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                               controller.clearControllers();
-                                Get.to(const RegisterScreen());
+                                Get.toNamed(RouteConstants.registerScreen);
                               },
                             style: GoogleFonts.inter(
                               color: ColorConstants.blueFf,

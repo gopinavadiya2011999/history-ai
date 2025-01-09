@@ -48,11 +48,10 @@ class FirebaseMethods {
     required BuildContext context,
     required String password,
   }) async {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference users = FirebaseFirestore.instance.collection("users");
 
     try {
-      QuerySnapshot querySnapshot = await users.where('email', isEqualTo: email).get();
-
+      QuerySnapshot querySnapshot = await users.where("email", isEqualTo: email).get();
       if (querySnapshot.docs.isEmpty) {
         showTopToast(msg: "Email not found.", context: context);
         return null;
@@ -75,6 +74,30 @@ class FirebaseMethods {
     }
   }
 
+  static Future<UserModel?> getUserData({
+    required String email,
+    required BuildContext context,
+  }) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    try {
+      QuerySnapshot querySnapshot = await users.where('email', isEqualTo: email).get();
+
+      if (querySnapshot.docs.isEmpty) {
+        showTopToast(msg: "Email not found.", context: context);
+        return null;
+      }
+
+      final userDoc = querySnapshot.docs.first;
+
+      return UserModel.fromJson(userDoc.data() as Map<String, dynamic>);
+    } catch (e) {
+      print("Error fetching user details: $e");
+      showTopToast(msg: "Something went wrong. Please try again.", context: context);
+      return null;
+    }
+  }
+
   static Future<bool> registerUser({
     required UserModel userData,
     required BuildContext context,
@@ -83,10 +106,7 @@ class FirebaseMethods {
     WriteBatch batch = firestore.batch();
 
     try {
-      final QuerySnapshot querySnapshot = await firestore
-          .collection("users")
-          .where("email", isEqualTo: userData.email)
-          .get();
+      final QuerySnapshot querySnapshot = await firestore.collection("users").where("email", isEqualTo: userData.email).get();
 
       if (querySnapshot.docs.isNotEmpty) {
         showTopToast(msg: "Email is already exists.", context: context);
@@ -108,6 +128,22 @@ class FirebaseMethods {
       print("Error writing data: $e");
       showTopToast(msg: "Error registering user. Please try again.", context: context);
       return false;
+    }
+  }
+
+  static Future updateUserData({
+    required String documentId,
+    required Map<String, dynamic> dataToUpdate,
+  }) async {
+    try {
+      // Reference the Firestore collection and document
+      final docRef = FirebaseFirestore.instance.collection("users").doc(documentId);
+
+      await docRef.update(dataToUpdate);
+
+      print('Document updated successfully.');
+    } catch (e) {
+      print('Error updating document: $e');
     }
   }
 

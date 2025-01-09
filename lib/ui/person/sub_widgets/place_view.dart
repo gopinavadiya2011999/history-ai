@@ -71,7 +71,8 @@ class PlaceView extends StatelessWidget {
                       onTap: () {
                         ChatController chatController = Get.put(ChatController());
                         chatController.selectedUser = User(
-                            name: controller.selectedCity!.name!, userDesc: controller.selectedCity!.desc!, userId: controller.selectedCity!.photo!);
+                            name: controller.selectedCity!.name!, userDesc: controller.selectedCity!.desc!,
+                            userId: controller.selectedCity!.photo!,photo:controller.selectedCity!.photo! );
                         chatController.message = null;
                         chatController.response = null;
                         chatController.selectedCategory = Category(
@@ -79,6 +80,7 @@ class PlaceView extends StatelessWidget {
                             name: controller.selectedPlace!.category!,
                             subCategory: convertPlaceSubCategoryToSubCategory(controller.selectedPlace!.subCategory!));
                         chatController.update();
+                       controller. update();
                         Get.toNamed(RouteConstants.chatScreen);
                       },
                     ),

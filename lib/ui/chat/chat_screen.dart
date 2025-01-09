@@ -1,5 +1,7 @@
+
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:history_ai/infrastructure/constant/image_constant.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +9,10 @@ import 'package:get/get.dart';
 import 'package:history_ai/ui/chat/sub_widgets/send_message_view.dart';
 import 'package:history_ai/ui/chat/sub_widgets/user_own_chat_view.dart';
 import 'package:history_ai/ui/chat/sub_widgets/welcome_chat_view.dart';
+import 'package:history_ai/ui/common_widgets/common_inkwell.dart';
 import 'package:history_ai/ui/common_widgets/common_profile_view.dart';
 import 'package:history_ai/ui/common_widgets/headline_body_text.dart';
+import 'package:history_ai/ui/main_screen/main_controller.dart';
 import 'package:history_ai/ui/main_screen/sub_widgets/ask_anything_app_bar.dart';
 import 'package:lottie/lottie.dart';
 import 'chat_controller.dart';
@@ -21,6 +25,7 @@ class ChatScreen extends GetView<ChatController> {
     return GetBuilder<ChatController>(
       init: ChatController(),
       builder: (controller) {
+
         return Scaffold(
           body: SafeArea(
             child: Container(
@@ -35,7 +40,13 @@ class ChatScreen extends GetView<ChatController> {
                   Expanded(
                     child: Column(
                       children: [
-                        const WelcomeChatView(),
+                        CommonInkwell(
+                            onTap: () {
+                              if (Get.put(MainController()).userModel != null) {
+                                Get.put(MainController()).editData();
+                              }
+                            },
+                            child: const WelcomeChatView()),
                         Expanded(
                           child: controller.response != null
                               ? SingleChildScrollView(
@@ -49,7 +60,13 @@ class ChatScreen extends GetView<ChatController> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             if (controller.selectedUser != null && controller.selectedUser!.photo != null)
-                                              CommonProfileView(imageUrl: controller.selectedUser!.photo, height: 40, width: 40),
+                                              CommonInkwell(
+                                                  onTap: () {
+                                                    if(controller.selectedUser!=null){
+                                                      Get.back();
+                                                    }
+                                                  },
+                                                  child: CommonProfileView(imageUrl: controller.selectedUser!.photo, height: 40, width: 40)),
                                             if (controller.selectedUser == null || controller.selectedUser!.photo == null)
                                               CircleAvatar(
                                                   radius: 22, backgroundColor: Colors.transparent, child: SvgPicture.asset(ImageConstant.appLogo)),
@@ -84,7 +101,26 @@ class ChatScreen extends GetView<ChatController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Lottie.asset(ImageConstant.aiBot, height: 150, width: 150, fit: BoxFit.fill),
-                                    const HeadlineBodyOneBaseWidget(title: "Search something ..."),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (controller.selectedUser != null) ...[
+                                          CommonInkwell(
+                                            onTap: () {
+                                              Get.back();
+                                            },
+                                            child: CommonProfileView(imageUrl: controller.selectedUser!.photo, height: 35, width: 35),
+                                          ),
+                                          const SizedBox(width: 5)
+                                        ],
+                                        HeadlineBodyOneBaseWidget(
+                                          title: controller.selectedUser != null
+                                              ? "Talk with ${controller.selectedUser!.name.split(" ").first}..."
+                                              : "Search something ...",
+                                          style: GoogleFonts.inter(fontSize: 14, color: ColorConstants.black, fontWeight: FontWeight.w400),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 )),
                         )

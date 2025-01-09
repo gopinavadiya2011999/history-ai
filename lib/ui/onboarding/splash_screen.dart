@@ -20,10 +20,10 @@ class _SplashScreenState extends State<SplashScreen> {
         SharedPreferences pref = await SharedPreferences.getInstance();
         bool? isLogin = pref.getBool('isLogin');
         if (isLogin == true) {
-          Get.toNamed(RouteConstants.mainScreen);
+          Get.offAllNamed(RouteConstants.mainScreen);
         } else {
 
-          Get.toNamed(RouteConstants.intro);
+          Get.offAllNamed(RouteConstants.intro);
         }
       },
     );

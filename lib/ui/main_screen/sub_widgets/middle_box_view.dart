@@ -44,20 +44,11 @@ class MiddleBoxView extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    HeadlineBodyOneBaseWidget(
-                      title: AppConstants.startNow.tr,
-                      style: GoogleFonts.archivo(color: ColorConstants.white, fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
-                    HeadlineBodyOneBaseWidget(
-                      title: AppConstants.seeAll.tr,
-                      style: GoogleFonts.archivo(color: ColorConstants.white, fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                  ],
+                HeadlineBodyOneBaseWidget(
+                  title: AppConstants.startNow.tr,
+                  style: GoogleFonts.archivo(color: ColorConstants.white, fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
                 Row(

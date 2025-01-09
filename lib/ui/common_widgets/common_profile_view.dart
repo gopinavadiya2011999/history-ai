@@ -14,12 +14,12 @@ class CommonProfileView extends StatelessWidget {
     return SizedBox(
         height: height ?? 80,
         width: width ?? 80,
-        child: imageUrl == null && imageUrl!.isEmpty
+        child: imageUrl == null || imageUrl!.isEmpty
             ? Container(
                 height: 80,
                 width: 80,
                 decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: ColorConstants.grey8B)),
-                child: const Icon(Icons.person, size: 40),
+                child:  Icon(Icons.person, size: (height??80)/2),
               )
             : ClipRRect(
                 borderRadius: BorderRadius.circular(100),
@@ -43,10 +43,10 @@ class CommonProfileView extends StatelessWidget {
                             height: height ?? 80,
                             width: width ?? 80,
                             decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey.withOpacity(0.5)),
-                            child: const Icon(Icons.person, size: 50),
+                            child: Icon(Icons.person, size: (height??80)/2),
                           );
                         },
                       )
-                    : Image.file(File(imageUrl!))));
+                    : Image.file(File(imageUrl!),fit: BoxFit.cover,)));
   }
 }

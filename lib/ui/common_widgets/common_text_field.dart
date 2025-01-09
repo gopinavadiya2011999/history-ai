@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:history_ai/infrastructure/constant/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +16,8 @@ class CommonTextField extends StatelessWidget {
       this.labelText,
       this.suffixIcon,
       this.obscureText,
-      this.validator, this.radius, this.minLines});
+      this.readOnly,
+      this.validator, this.radius, this.minLines, this.inputFormatters});
   final int? maxLines;
   final int? minLines;
   final double? radius;
@@ -24,6 +26,8 @@ class CommonTextField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final bool? obscureText;
+  final bool? readOnly;
+  final List<TextInputFormatter>? inputFormatters;
   final GestureTapCallback? onTap;
   final TextCapitalization ?textCapitalization;
   final TextEditingController? controller;
@@ -46,8 +50,11 @@ class CommonTextField extends StatelessWidget {
           ),
         if (labelText != null) const SizedBox(height: 8),
         TextFormField(
+          autofocus: false,
+          inputFormatters: inputFormatters,
           obscureText: obscureText ?? false,
           onTap: onTap,
+          readOnly: readOnly??false,
           textCapitalization:textCapitalization??  TextCapitalization.none,
           validator: validator,
           keyboardType: TextInputType.multiline,

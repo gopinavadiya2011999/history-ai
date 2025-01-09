@@ -8,10 +8,12 @@ import 'package:history_ai/infrastructure/model/character_model.dart';
 import 'package:history_ai/infrastructure/model/user_model.dart';
 import 'package:history_ai/infrastructure/routes/route_constants.dart';
 import 'package:history_ai/main.dart';
+import 'package:history_ai/ui/main_screen/main_controller.dart';
 import 'package:uuid/uuid.dart';
 
 class LoginRegisterController extends GetxController {
   RxBool voiceEmpty = false.obs;
+  RxBool fromEdit = false.obs;
   RxString voiceName = "".obs;
   // List<String> voiceNameList = ["Alloy", "Echo", "Fable", "Onyx", "Nova", "Shimmer"];
   CharImageModel? selectedCharacter;
@@ -48,10 +50,10 @@ class LoginRegisterController extends GetxController {
           await FirebaseMethods.getLoginUserDetail(email: emailController.text.trim(), context: context, password: passwordController.text.trim());
 
       if (userModel != null) {
-        preferences?.setBool("isLogin", true);
+        await preferences?.setBool("isLogin", true);
         String userJson = userModel.toRawJson();
-        preferences?.setString("userDetail", userJson);
-        Get.toNamed(RouteConstants.mainScreen);
+        await preferences?.setString("userDetail", userJson);
+        Get.offAllNamed(RouteConstants.mainScreen);
         showTopToast(msg: "User registered successfully!", context: context);
       }
 
@@ -62,16 +64,44 @@ class LoginRegisterController extends GetxController {
     update();
   }
 
+  editUserToFirestore({required BuildContext context}) async {
+    MainController mainController = Get.put(MainController());
+    isRegisterLoading.value = true;
+    update();
+
+    await FirebaseMethods.updateUserData(dataToUpdate: {
+      "first_name": firstNameController.text.trim(),
+      "last_name": lastNameController.text.trim(),
+      "profile_pic": selectedCharacter!.id,
+      "updated_at": Timestamp.now()
+    }, documentId: mainController.userModel!.userId);
+
+    UserModel? userModel = await FirebaseMethods.getUserData(email: emailController.text.trim(), context: context);
+    if (userModel != null) {
+      await preferences?.remove("userDetail");
+      String userJson = userModel.toRawJson();
+      await preferences?.setString("userDetail", userJson);
+
+      mainController.userModel = userModel;
+
+      mainController.update();
+      showTopToast(msg: "User updated successfully!", context: context);
+    }
+
+    isRegisterLoading.value = false;
+    update();
+  }
+
   loginUser({required BuildContext context}) async {
     isLoginLoading.value = true;
     update();
     UserModel? userModel =
         await FirebaseMethods.getLoginUserDetail(email: emailController.text.trim(), context: context, password: passwordController.text.trim());
     if (userModel != null) {
-      preferences?.setBool("isLogin", true);
+      await preferences?.setBool("isLogin", true);
       String userJson = userModel.toRawJson();
-      preferences?.setString("userDetail", userJson);
-      Get.toNamed(RouteConstants.mainScreen);
+      await preferences?.setString("userDetail", userJson);
+      Get.offAllNamed(RouteConstants.mainScreen);
     }
     clearControllers();
     isLoginLoading.value = false;

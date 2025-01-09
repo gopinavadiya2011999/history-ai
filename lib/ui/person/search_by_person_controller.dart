@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:history_ai/infrastructure/firestore/firebase_methods.dart';
 import 'package:history_ai/infrastructure/model/hostory_model.dart';
 import 'package:history_ai/infrastructure/model/place_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SearchByPersonController extends GetxController {
   List<Category> categoryList = [];
@@ -16,12 +17,17 @@ class SearchByPersonController extends GetxController {
   RxBool isHistorySelected = true.obs;
   RxBool isPlaceSelected = true.obs;
   TextEditingController categoryController = TextEditingController();
-
+  XFile? file;
   User? selectedUser ;
   City? selectedCity;
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
 
+  pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    file = await picker.pickImage(source: ImageSource.gallery);
+    update();
+  }
 
   @override
   void onInit() {

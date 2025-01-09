@@ -6,11 +6,11 @@ import 'package:history_ai/ui/main_screen/main_screen.dart';
 import 'package:history_ai/ui/main_screen/sub_files/add_data_to_firestore.dart';
 import 'package:history_ai/ui/main_screen/sub_files/add_place_data_to_firestore.dart';
 import 'package:history_ai/ui/main_screen/sub_files/ask_anything_view.dart';
-import 'package:history_ai/ui/onboarding/create_character/create_character_binding.dart';
-import 'package:history_ai/ui/onboarding/create_character/create_character_screen.dart';
 import 'package:history_ai/ui/onboarding/intro/intro_binding.dart';
 import 'package:history_ai/ui/onboarding/intro/intro_screen.dart';
 import 'package:history_ai/ui/onboarding/intro/open_account.dart';
+import 'package:history_ai/ui/onboarding/login_register/login_register_binding.dart';
+import 'package:history_ai/ui/onboarding/login_register/register_screen.dart';
 import 'package:history_ai/ui/onboarding/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:history_ai/ui/person/search_by_person_binding.dart';
@@ -43,17 +43,17 @@ class AppPages {
       name: RouteConstants.openAccount,
       page: () => const OpenAccountScreen(),
       binding: IntroBinding(),
+    ),GetPage(
+      name: RouteConstants.registerScreen,
+      page: () => const RegisterScreen(),
+      binding: LoginRegisterBinding(),
     ),
     GetPage(
       name: RouteConstants.chatScreen,
       page: () => const ChatScreen(),
       binding: ChatBinding(),
     ),
-    GetPage(
-      name: RouteConstants.createCharacter,
-      page: () => const CreateCharacterScreen(),
-      binding: CreateCharacterBinding(),
-    ),
+
     GetPage(
       name: RouteConstants.mainScreen,
       page: () => const MainScreen(),

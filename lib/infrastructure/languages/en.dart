@@ -56,7 +56,7 @@ const Map<String, String> en = {
   "scan_desc": "Find the picture you want.",
   "idea": "Idea",
   "idea_desc": "Come up with an interesting idea.",
-  "send_a_message":"Send a message. . .",
+  "send_a_message":"Message AI",
   "categories":"Categories",
   "no_data_found":"No data found",
   "choose_one":"Choose one of them for chat",

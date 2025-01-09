@@ -21,18 +21,26 @@ class SendMessageView extends StatelessWidget {
             children: [
               Expanded(
                 child: CommonTextField(
-                  hintText: AppConstants.sendAMessage.tr,
+                  hintText:
+                      controller.selectedUser != null ? "Message ${controller.selectedUser!.name.split(" ").first}..." : AppConstants.sendAMessage.tr,
                   maxLines: 6,
                   radius: 10,
                   suffixIcon: CommonInkwell(
                       onTap: () async {
+                        FocusScope.of(context).unfocus();
                         controller.isMessageSending = true.obs;
                         controller.message = controller.messageController.text.trim();
                         controller.update();
-                       controller.response= await ApiMethods.getTextFromAI(
-                            text: controller.messageController.text.trim(),
-                            userName: controller.selectedUser!.name,
-                            userDetail: controller.selectedCategory!.name);
+                        if( controller.selectedUser!=null){
+                          controller.response = await ApiMethods.getTextFromAI(
+                              text: controller.messageController.text.trim(),
+                              userName: controller.selectedUser!.name,
+                              userDetail: controller.selectedCategory!.name);
+                        }
+                       else{
+                          controller.response = await ApiMethods.normalChatWithAI(
+                              text: controller.messageController.text.trim());
+                        }
                         controller.isMessageSending = false.obs;
                         controller.messageController.clear();
                         controller.update();
@@ -48,15 +56,15 @@ class SendMessageView extends StatelessWidget {
                   controller: controller.messageController,
                 ),
               ),
-              const SizedBox(width: 8),
-              CommonInkwell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: const BoxDecoration(color: ColorConstants.green6BB, shape: BoxShape.circle),
-                  child: const Icon(Icons.keyboard_voice_outlined, size: 24),
-                ),
-              )
+              // const SizedBox(width: 8),
+              // CommonInkwell(
+              //   onTap: () {},
+              //   child: Container(
+              //     padding: const EdgeInsets.all(14),
+              //     decoration: const BoxDecoration(color: ColorConstants.green6BB, shape: BoxShape.circle),
+              //     child: const Icon(Icons.keyboard_voice_outlined, size: 24),
+              //   ),
+              // )
             ],
           );
         });

@@ -28,6 +28,29 @@ class ApiMethods {
     } else {
       throw Exception('Failed to generate audio');
     }
+  } static Future<String> normalChatWithAI({required String text}) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCTQ0O4Zsm0Ul4nT93YYHIda3CHZfDXmb0'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        "contents": [
+          {
+            "role": "user",
+            "parts": [
+              {"text": text}
+            ]
+          }
+        ]
+      }),
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body)['candidates'][0]['content']['parts'][0]['text'];
+    } else {
+      throw Exception('Failed to generate audio');
+    }
   }
 
   static Future<String> getAudioFromAI(String text) async {

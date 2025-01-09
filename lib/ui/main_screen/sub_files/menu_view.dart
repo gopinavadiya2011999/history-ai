@@ -43,8 +43,13 @@ class MenuView extends StatelessWidget {
                     Expanded(
                         child: Column(
                       children: [
-                        commonRow(onTap: () {}, text: AppConstants.profile.tr, icon: ImageConstant.user),
-                        commonRow(onTap: () {}, text: AppConstants.settings.tr, icon: ImageConstant.setting),
+                        commonRow(
+                            onTap: () {
+                              controller.editData();
+                            },
+                            text: AppConstants.profile.tr,
+                            icon: ImageConstant.user),
+
                         commonRow(onTap: () {}, text: AppConstants.helpCenter.tr, icon: ImageConstant.helpCenter),
                         commonRow(
                             onTap: () {
@@ -65,13 +70,13 @@ class MenuView extends StatelessWidget {
                       onTap: () {
                         preferences?.remove('isLogin');
                         preferences?.remove('userDetail');
-                        Get.toNamed(RouteConstants.intro);
+                        Get.deleteAll();
+                        Get.offAllNamed(RouteConstants.intro);
                       },
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        decoration: BoxDecoration(border: Border.all(color: ColorConstants.grayD8),
-                            borderRadius: BorderRadius.circular(50)),
+                        decoration: BoxDecoration(border: Border.all(color: ColorConstants.grayD8), borderRadius: BorderRadius.circular(50)),
                         child: HeadlineBodyOneBaseWidget(
                           title: AppConstants.logOut.tr,
                           titleTextAlign: TextAlign.center,

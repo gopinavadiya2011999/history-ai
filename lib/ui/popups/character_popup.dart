@@ -25,6 +25,31 @@ class CharacterPopup extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
+                    child:  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const HeadlineBodyOneBaseWidget(
+                          title: "Choose one character",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CommonInkwell(
+                          onTap: () => Get.back(),
+                          child: Container(
+                            padding: const EdgeInsets.all(3),
+                               decoration: const BoxDecoration(
+                                 color: ColorConstants.black,
+                                 shape: BoxShape.circle
+                               ),
+                              child: const Icon(Icons.close,
+                                size: 20,
+                                color: ColorConstants.white,)),
+                        )
+                      ],
+                    ),
+                  ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Wrap(
@@ -35,14 +60,13 @@ class CharacterPopup extends StatelessWidget {
                         runAlignment: WrapAlignment.center,
                         children: List.generate(
                           controller.charImageData.length,
-                              (index) {
+                          (index) {
                             return CommonInkwell(
                               onTap: () {
                                 for (var element in controller.charImageData) {
                                   element.selectedCharacter = false;
                                 }
-                                controller.charImageData[index].selectedCharacter =
-                                !controller.charImageData[index].selectedCharacter;
+                                controller.charImageData[index].selectedCharacter = !controller.charImageData[index].selectedCharacter;
                                 controller.update();
                                 setState(() {});
                               },
@@ -52,12 +76,12 @@ class CharacterPopup extends StatelessWidget {
                                   maxWidth: 100,
                                 ),
                                 child: Container(
-                                  padding:  EdgeInsets.all(controller.charImageData[index].selectedCharacter?3:0),
+                                  padding: const EdgeInsets.all(3),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                       color: controller.charImageData[index].selectedCharacter
-                                          ? ColorConstants.black11
+                                          ? ColorConstants.black11.withOpacity(0.5)
                                           : Colors.transparent,
                                       width: 2,
                                     ),
@@ -75,8 +99,8 @@ class CharacterPopup extends StatelessWidget {
                                         title: controller.charImageData[index].name,
                                         fontSize: 10,
                                         maxLine: 2,
-                                         fontWeight: FontWeight.w500,
-                                         textOverflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w500,
+                                        textOverflow: TextOverflow.ellipsis,
                                         titleTextAlign: TextAlign.center,
                                       ),
                                     ],
@@ -87,8 +111,7 @@ class CharacterPopup extends StatelessWidget {
                           },
                         ),
                       ),
-                    )
-                    ,
+                    ),
                   ),
                 ],
               ),

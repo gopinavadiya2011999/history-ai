@@ -29,20 +29,26 @@ class UserModel {
   String toRawJson() => json.encode(toJson());
 
   // Convert JSON map to UserModel object
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    profilePic: json["profile_pic"],
-    email: json["email"],
-    userId: json["user_id"],
-    password: json["password"],
-    createdAt: json["created_at"] != null
-        ? Timestamp.fromMillisecondsSinceEpoch(json["created_at"])
-        : null,
-    updatedAt: json["updated_at"] != null
-        ? Timestamp.fromMillisecondsSinceEpoch(json["updated_at"])
-        : null,
-  );
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    // Handle createdAt and updatedAt as Timestamp or milliseconds
+    Timestamp? parseTimestamp(dynamic value) {
+      if (value == null) return null;
+      if (value is Timestamp) return value;
+      if (value is int) return Timestamp.fromMillisecondsSinceEpoch(value);
+      throw Exception("Invalid timestamp format: $value");
+    }
+
+    return UserModel(
+      firstName: json["first_name"] ?? '',
+      lastName: json["last_name"] ?? '',
+      profilePic: json["profile_pic"] ?? '',
+      email: json["email"] ?? '',
+      userId: json["user_id"] ?? '',
+      password: json["password"] ?? '',
+      createdAt: parseTimestamp(json["created_at"]),
+      updatedAt: parseTimestamp(json["updated_at"]),
+    );
+  }
 
   // Convert UserModel object to JSON map
   Map<String, dynamic> toJson() => {

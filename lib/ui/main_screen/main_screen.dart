@@ -29,6 +29,7 @@ class MainScreen extends GetView<MainController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
+                  if(controller.userModel!=null)
                   const AppbarProfileRow(),
                   Expanded(
                       child: Container(
